@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Working Auth Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .success { color: green; }
+        .error { color: red; }
+        .test-button { background: #007cba; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin: 5px; }
+        .test-button:hover { background: #005a8b; }
+        pre { background: #f0f0f0; padding: 10px; border-radius: 5px; overflow-x: auto; }
+        .credentials { background: #e8f4f8; padding: 15px; border-radius: 5px; margin: 10px 0; }
+    </style>
+</head>
+<body>
+    <h1>🎵 Ragam Authentication Test</h1>
+    
+    <div class="credentials">
+        <h3>✅ Test Credentials (No Database Required!):</h3>
+        <ul>
+            <li><strong>Student:</strong> student@test.com / password</li>
+            <li><strong>Teacher:</strong> teacher@test.com / password</li>
+            <li><strong>Student:</strong> student@gmail.com / 123456</li>
+            <li><strong>Teacher:</strong> teacher@gmail.com / 123456</li>
+        </ul>
+    </div>
+    
+    <h2>Quick Tests:</h2>
+    <button class="test-button" onclick="testStudentLogin()">Test Student Login</button>
+    <button class="test-button" onclick="testTeacherLogin()">Test Teacher Login</button>
+    <button class="test-button" onclick="testWrongPassword()">Test Wrong Password</button>
+    <button class="test-button" onclick="testRegistration()">Test Registration</button>
+    
+    <div id="result"></div>
+    
+    <h2>Manual Test:</h2>
+    <div>
+        <label>Email: <input type="email" id="email" value="student@test.com"></label><br><br>
+        <label>Password: <input type="password" id="password" value="password"></label><br><br>
+        <label>Type: 
+            <select id="usertype">
+                <option value="student">Student</option>
+                <option value="teacher">Teacher</option>
+            </select>
+        </label><br><br>
+        <button class="test-button" onclick="manualTest()">Test Login</button>
+    </div>
+
+    <script>
+        function showResult(title, data, isSuccess = true) {
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = `
+                <h3 class="${isSuccess ? 'success' : 'error'}">${title}</h3>
+                <pre>${JSON.stringify(data, null, 2)}</pre>
+            `;
+        }
+
+        async function testLogin(email, password, userType, testName) {
+            try {
+                const response = await fetch('auth.php?action=login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        email: email,
+                        password: password,
+                        user_type: userType
+                    })
+                });
+                
+                const data = await response.json();
+                showResult(`${testName} Result:`, data, data.success);
+            } catch (error) {
+                showResult(`${testName} Error:`, { error: error.message }, false);
+            }
+        }
+
+        function testStudentLogin() {
+            testLogin('student@test.com', 'password', 'student', 'Student Login');
+        }
+
+        function testTeacherLogin() {
+            testLogin('teacher@test.com', 'password', 'teacher', 'Teacher Login');
+        }
+
+        function testWrongPassword() {
+            testLogin('student@test.com', 'wrongpassword', 'student', 'Wrong Password');
+        }
+
+        async function testRegistration() {
+            try {
+                const response = await fetch('auth.php?action=register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        email: 'newuser@test.com',
+                        password: 'newpassword',
+                        full_name: 'New User',
+                        user_type: 'student'
+                    })
+                });
+                
+                const data = await response.json();
+                showResult('Registration Result:', data, data.success);
+            } catch (error) {
+                showResult('Registration Error:', { error: error.message }, false);
+            }
+        }
+
+        function manualTest() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const userType = document.getElementById('usertype').value;
+            
+            testLogin(email, password, userType, 'Manual Test');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Basic Colors -->
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    
+    <!-- Primary Colors -->
+    <color name="colorPrimary">#2E7D9A</color>
+    <color name="primary">#2E7D9A</color>
+    <color name="primary_blue">#2E7D9A</color>
+    <color name="rounded_button_blue">#2196F3</color>
+    <color name="primary_blue_dark">#1E5A6B</color>
+    <color name="primary_blue_light">#4A9BB8</color>
+    
+    <!-- Accent Colors -->
+    <color name="accent_teal">#26A69A</color>
+    <color name="rounded_button_green">#26A69A</color>
+    <color name="accent_green">#4CAF50</color>
+    <color name="accent_orange">#FF7043</color>
+
+    <!-- Button Colors -->
+    <color name="button_primary">#26A69A</color>
+    <color name="button_primary_pressed">#00695C</color>
+    <color name="button_secondary">#607D8B</color>
+    <color name="button_secondary_pressed">#37474F</color>
+
+    <color name="rounded_button_orange">#FF8010</color>
+    <color name="button_orange">#FF9800</color> <!-- Orange -->
+    <color name="button_orange_pressed">#F57C00</color> <!-- Darker Orange -->
+
+    <color name="button_blue">#2196F3</color> <!-- Blue -->
+    <color name="button_blue_pressed">#1976D2</color> <!-- Darker Blue -->
+
+    <!-- Text Colors -->
+    <color name="text_primary">#212121</color>
+    <color name="textPrimary">#212121</color>
+    <color name="text_secondary">#757575</color>
+    <color name="textSecondary">#757575</color>
+    <color name="text_hint">#BDBDBD</color>
+    
+    <!-- Background Colors -->
+    <color name="background">#FAFAFA</color>
+    <color name="background_light">#FAFAFA</color>
+    <color name="background_card">#FFFFFF</color>
+    <color name="background_overlay">#E0E0E0</color>
+    
+    <!-- Status Bar -->
+    <color name="status_bar">#1E5A6B</color>
+</resources>

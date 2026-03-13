@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bguiwhite"
+    android:padding="24dp">
+
+    <TextView
+        android:id="@+id/title_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Welcome to Ragam"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        android:textSize="28sp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:fontFamily="serif"/>
+
+    <TextView
+        android:id="@+id/subtitle_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Choose your role to get started"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+        android:layout_below="@id/title_text"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:fontFamily="sans-serif"/>
+
+    <ImageView
+        android:id="@+id/music_image"
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        android:src="@drawable/splashimage"
+        android:layout_below="@id/subtitle_text"
+        android:layout_marginTop="40dp"
+        android:layout_centerHorizontal="true"
+        android:scaleType="fitCenter" />
+
+    <!-- Student Login Button -->
+    <LinearLayout
+        android:id="@+id/student_login_button"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_below="@id/music_image"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/rounded_button_blue"
+        android:clickable="true"
+        android:focusable="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Login as Student"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+    <!-- Teacher Login Button -->
+    <LinearLayout
+        android:id="@+id/teacher_login_button"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_below="@id/student_login_button"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/rounded_button_orange"
+        android:clickable="true"
+        android:focusable="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Login as Teacher"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+</RelativeLayout>

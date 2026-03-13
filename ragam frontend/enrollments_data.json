@@ -1,0 +1,49 @@
+[
+    {
+        "enrollment_id": 1,
+        "student_id": 2,
+        "course_id": 1,
+        "enrolled_at": "2025-10-08 20:07:21",
+        "progress": 0
+    },
+    {
+        "enrollment_id": 2,
+        "student_id": 1,
+        "course_id": 2,
+        "enrolled_at": "2025-10-13 22:46:41",
+        "progress": 0,
+        "completed_videos": 0
+    },
+    {
+        "enrollment_id": 3,
+        "student_id": 1,
+        "course_id": 3,
+        "enrolled_at": "2025-10-14 06:27:38",
+        "progress": 0,
+        "completed_videos": 0
+    },
+    {
+        "enrollment_id": 4,
+        "student_id": 9,
+        "course_id": 5,
+        "enrolled_at": "2025-10-14 11:36:59",
+        "progress": 0,
+        "completed_videos": 0
+    },
+    {
+        "enrollment_id": 5,
+        "student_id": 9,
+        "course_id": 2,
+        "enrolled_at": "2025-10-14 11:44:01",
+        "progress": 0,
+        "completed_videos": 0
+    },
+    {
+        "enrollment_id": 6,
+        "student_id": 5,
+        "course_id": 1,
+        "enrolled_at": "2025-10-16 21:04:04",
+        "progress": 0,
+        "completed_videos": 0
+    }
+]

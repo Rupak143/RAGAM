@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Internet permission for API calls -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    
+    <!-- Storage permissions for video uploads and certificate downloads -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" 
+        android:maxSdkVersion="32" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="28" />
+    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@drawable/ragamlogo"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/ragamlogo"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Ragamfinal"
+        android:usesCleartextTraffic="true"
+        android:networkSecurityConfig="@xml/network_security_config"
+        tools:targetApi="31">
+        
+        <!-- Splash Activity - Entry Point -->
+        <activity
+            android:name=".SplashActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Ragamfinal.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- User Option Activity -->
+        <activity android:name=".UserOptionActivity" />
+
+        <!-- Student Activities -->
+        <activity android:name=".StudentSignInActivity" />
+        <activity android:name=".StudentSignUpActivity" />
+        
+        <!-- Main Container with Bottom Navigation -->
+        <activity android:name=".MainContainerActivity" 
+            android:theme="@style/Theme.Ragamfinal.NoActionBar" />
+        
+        <activity android:name=".StudentHomeActivity" />
+        <activity android:name=".StudentEnrolledCoursesActivity" />
+        <activity android:name=".StudentCompletedCoursesActivity" />
+        <activity android:name=".CoursesActivity" />
+        <activity android:name=".CourseDetailActivity" />
+        <activity android:name=".MentorsActivity" />
+        <activity android:name=".MentorDetailActivity" />
+        <activity android:name=".ChatActivity" />
+        <activity android:name=".ProfileActivity" />
+        <activity android:name=".EditProfileActivity" />
+        <activity android:name=".CertificatesActivity" />
+
+        <!-- Teacher Activities -->
+        <activity android:name=".TeacherSignInActivity" />
+        <activity android:name=".TeacherSignUpActivity" />
+        
+        <!-- Teacher Main Container with Bottom Navigation -->
+        <activity android:name=".TeacherMainContainerActivity" 
+            android:theme="@style/Theme.Ragamfinal.NoActionBar" />
+        
+        <activity android:name=".TeacherHomeActivity" />
+        <activity android:name=".TeacherCourseSetupActivity" />
+        <activity android:name=".TeacherVideoDetailsActivity" />
+        <activity android:name=".TeacherTestPaperActivity" />
+        <activity android:name=".TeacherCreateCourseActivity" />
+        <activity android:name=".TeacherMyCoursesActivity" />
+        <activity android:name=".TeacherViewStudentsActivity" />
+        <activity android:name=".TeacherViewStudentsByCoursesActivity" />
+        <activity android:name=".TeacherViewCourseActivity" />
+        <activity android:name=".TeacherEditProfileActivity" />
+
+        <!-- Video Player Activity -->
+        <activity android:name=".VideoPlayerActivity" />
+        <activity android:name=".CourseVideosListActivity" />
+        <activity android:name=".SingleVideoPlayerActivity" />
+        
+        <!-- Student Quiz Activity - FIXED: Added to prevent crash -->
+        <activity android:name=".StudentQuizActivity" />
+        
+        <!-- Quiz Result Activity - Shows score and certificate -->
+        <activity android:name=".QuizResultActivity" />
+        
+        <!-- Terms and Conditions Activity -->
+        <activity android:name=".TermsConditionsActivity" />
+        
+        <!-- Network Test Activity -->
+        <activity android:name=".NetworkTestActivity" />
+        
+        <!-- IP Switcher Activity -->
+        <activity 
+            android:name=".IPSwitcherActivity"
+            android:label="IP Configuration"
+            android:theme="@style/Theme.Ragamfinal" />
+
+    </application>
+
+</manifest>

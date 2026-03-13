@@ -1,0 +1,91 @@
+[
+    {
+        "video_id": 1,
+        "course_id": 1,
+        "video_number": 1,
+        "title": "Introduction to Guitar",
+        "video_url": "https:\/\/example.com\/video1.mp4",
+        "duration": "10:30",
+        "uploaded_at": "2025-10-08 20:12:08"
+    },
+    {
+        "video_id": 2,
+        "course_id": 1,
+        "video_number": 2,
+        "title": "Guitar Chords Basics",
+        "video_url": "https:\/\/example.com\/video2.mp4",
+        "duration": "15:00",
+        "uploaded_at": "2025-10-08 20:12:40"
+    },
+    {
+        "video_id": 3,
+        "course_id": 1,
+        "video_number": 3,
+        "title": "Strumming Patterns",
+        "video_url": "https:\/\/example.com\/video3.mp4",
+        "duration": "12:45",
+        "uploaded_at": "2025-10-08 20:12:40"
+    },
+    {
+        "video_id": 4,
+        "course_id": 1,
+        "video_number": 4,
+        "title": "Finger Exercises",
+        "video_url": "https:\/\/example.com\/video4.mp4",
+        "duration": "8:20",
+        "uploaded_at": "2025-10-08 20:12:40"
+    },
+    {
+        "video_id": 5,
+        "course_id": 1,
+        "video_number": 5,
+        "title": "First Song",
+        "video_url": "https:\/\/example.com\/video5.mp4",
+        "duration": "20:00",
+        "uploaded_at": "2025-10-08 20:12:40"
+    },
+    {
+        "video_id": 6,
+        "course_id": 2,
+        "video_number": 1,
+        "title": "flute 1",
+        "description": "1.1",
+        "video_url": "",
+        "video_path": "local_storage",
+        "duration": "00:00",
+        "uploaded_at": "2025-10-13 21:07:26"
+    },
+    {
+        "video_id": 7,
+        "course_id": 2,
+        "video_number": 2,
+        "title": "flute 2",
+        "description": "1.2",
+        "video_url": "",
+        "video_path": "local_storage",
+        "duration": "00:00",
+        "uploaded_at": "2025-10-13 21:07:26"
+    },
+    {
+        "video_id": 8,
+        "course_id": 3,
+        "video_number": 1,
+        "title": "e",
+        "description": "r",
+        "video_url": "",
+        "video_path": "local_storage",
+        "duration": "00:00",
+        "uploaded_at": "2025-10-14 06:26:34"
+    },
+    {
+        "video_id": 9,
+        "course_id": 3,
+        "video_number": 2,
+        "title": "t",
+        "description": "y",
+        "video_url": "",
+        "video_path": "local_storage",
+        "duration": "00:00",
+        "uploaded_at": "2025-10-14 06:26:34"
+    }
+]

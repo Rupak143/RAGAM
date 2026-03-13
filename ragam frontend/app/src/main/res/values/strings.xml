@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Ragamfinal</string>
+    <string name="welcome_back">Welcome Back!</string>
+    <string name="get_started">Get Started</string>
+    <string name="student_login">Login as Student</string>
+    <string name="teacher_login">Login as Teacher</string>
+    <string name="email_hint">Email here</string>
+    <string name="password_hint">Password</string>
+    <string name="sign_in">SIGN IN</string>
+    <string name="sign_up">SIGN UP</string>
+    <string name="home">Home</string>
+    <string name="courses">Courses</string>
+    <string name="inbox">Inbox</string>
+    <string name="profile">Profile</string>
+</resources>

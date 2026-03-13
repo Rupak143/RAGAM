@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bguiwhite"
+    android:padding="24dp">
+
+    <!-- Title -->
+    <TextView
+        android:id="@+id/signin_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Student Sign in"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="120dp" />
+
+    <!-- Email -->
+    <EditText
+        android:id="@+id/email_input"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="Email here"
+        android:inputType="textEmailAddress"
+        android:textColor="@android:color/black"
+        android:background="@drawable/input_field"
+        android:paddingHorizontal="16dp"
+        android:layout_below="@id/signin_title"
+        android:layout_marginTop="60dp" />
+
+    <!-- Password -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/password_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/email_input"
+        android:layout_marginTop="20dp"
+        app:endIconMode="password_toggle"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/password_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:textColor="@android:color/black" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Sign In Button -->
+    <Button
+        android:id="@+id/signin_button"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="SIGN IN"
+        android:textAllCaps="true"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:layout_below="@id/password_layout"
+        android:layout_marginTop="40dp"
+        android:backgroundTint="@android:color/holo_orange_light"
+        android:background="@drawable/rounded_button" />
+
+    <!-- Sign up text -->
+    <TextView
+        android:id="@+id/signup_link"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Don't have an account? "
+        android:textColor="@android:color/black"
+        android:textSize="14sp"
+        android:layout_below="@id/signin_button"
+        android:layout_marginTop="24dp"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/signup_here"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="sign up here"
+        android:textColor="@android:color/holo_green_dark"
+        android:textSize="14sp"
+        android:layout_toEndOf="@id/signup_link"
+        android:layout_alignBaseline="@id/signup_link"
+        android:clickable="true"
+        android:focusable="true" />
+</RelativeLayout>

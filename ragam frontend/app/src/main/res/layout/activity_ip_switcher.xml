@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="#F5F5F5">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <!-- Header -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="IP Address Configuration"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#333333"
+            android:gravity="center"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Switch between different IP addresses for your backend"
+            android:textSize="14sp"
+            android:textColor="#666666"
+            android:gravity="center"
+            android:layout_marginBottom="24dp"/>
+
+        <!-- Current IP Display -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:elevation="4dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:background="#E3F2FD">
+
+                <TextView
+                    android:id="@+id/textCurrentIP"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Current IP: Loading..."
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="#1976D2"
+                    android:gravity="center"/>
+
+                <TextView
+                    android:id="@+id/textConnectionStatus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textSize="14sp"
+                    android:gravity="center"
+                    android:layout_marginTop="8dp"/>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- IP Selection -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Select IP Address:"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#333333"
+            android:layout_marginBottom="16dp"/>
+
+        <RadioGroup
+            android:id="@+id/radioGroupIP"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp">
+
+            <!-- IP Address 1 -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:elevation="2dp">
+
+                <RadioButton
+                    android:id="@+id/radioIP1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="IP 1: 192.168.48.1 (Mobile Hotspot)"
+                    android:textSize="16sp"
+                    android:padding="16dp"
+                    android:background="?attr/selectableItemBackground"/>
+
+            </androidx.cardview.widget.CardView>
+
+            <!-- IP Address 2 -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:elevation="2dp">
+
+                <RadioButton
+                    android:id="@+id/radioIP2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="IP 2: 10.17.207.64 (WiFi Network)"
+                    android:textSize="16sp"
+                    android:padding="16dp"
+                    android:background="?attr/selectableItemBackground"/>
+
+            </androidx.cardview.widget.CardView>
+
+            <!-- Localhost -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:elevation="2dp">
+
+                <RadioButton
+                    android:id="@+id/radioLocalhost"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Localhost: 10.0.2.2 (Emulator)"
+                    android:textSize="16sp"
+                    android:padding="16dp"
+                    android:background="?attr/selectableItemBackground"/>
+
+            </androidx.cardview.widget.CardView>
+
+        </RadioGroup>
+
+        <!-- Action Buttons -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="8dp">
+
+            <Button
+                android:id="@+id/btnTestConnection"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:text="Test Connection"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:backgroundTint="#2196F3"
+                android:layout_marginBottom="12dp"/>
+
+            <Button
+                android:id="@+id/btnSaveIP"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:text="Save &amp; Apply"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:backgroundTint="#4CAF50"
+                android:layout_marginBottom="12dp"/>
+
+            <Button
+                android:id="@+id/btnBackFromIPSwitcher"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:text="Back"
+                android:textSize="16sp"
+                android:backgroundTint="#757575"/>
+
+        </LinearLayout>
+
+        <!-- Help Text -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="💡 Tip: Test connection before saving to ensure the IP is reachable. Restart the app after changing IP."
+            android:textSize="12sp"
+            android:textColor="#666666"
+            android:padding="16dp"
+            android:layout_marginTop="16dp"
+            android:background="#FFF9C4"/>
+
+    </LinearLayout>
+
+</ScrollView>

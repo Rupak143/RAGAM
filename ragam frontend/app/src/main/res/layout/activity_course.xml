@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Scrollable Layout -->
+    <ScrollView
+        android:id="@+id/scrollable_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/enroll_button"
+        android:fillViewport="true"
+        android:background="@drawable/bguionlyblue">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Top Black Section -->
+            <LinearLayout
+                android:id="@+id/top_black_section"
+                android:layout_width="match_parent"
+                android:layout_height="240dp"
+                android:background="@android:color/black"
+                android:padding="16dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/back_button"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginTop="20dp"
+                    android:src="@drawable/ic_backwhite" />
+
+                <!-- Play Course Button in center of top section -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/play_icon"
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:src="@drawable/ic_video"
+                        android:layout_marginBottom="16dp"
+                        android:background="@drawable/rounded_button_white"
+                        android:padding="16dp"
+                        android:scaleType="centerInside" />
+
+                    <Button
+                        android:id="@+id/play_course_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="45dp"
+                        android:text="▶ PLAY COURSE"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/white"
+                        android:background="@drawable/rounded_button_green"
+                        android:paddingHorizontal="24dp"
+                        android:textSize="16sp"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/course_status_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Enroll to access course content"
+                        android:textColor="@android:color/white"
+                        android:textSize="14sp"
+                        android:layout_marginTop="8dp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Bottom Blue Section Content -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <!-- Course Card -->
+                <LinearLayout
+                    android:id="@+id/course_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@drawable/rounded_button_white"
+                    android:padding="18dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="20dp"
+                    android:elevation="4dp">
+
+                    <TextView
+                        android:id="@+id/course_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Fundamentals of Carnatic Music"
+                        android:textColor="@android:color/black"
+                        android:textSize="18sp"
+                        android:gravity="center"
+                        android:textStyle="bold" />
+
+                    <!-- About Tabs -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:backgroundTint="@color/rounded_button_green"
+                            android:text="About the course"
+                            android:textStyle="bold"
+                            android:textColor="@android:color/white" />
+                    </LinearLayout>
+
+                    <!-- About Course -->
+                    <TextView
+                        android:id="@+id/course_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="Master the fundamentals of sruthi, laya, and gamakas with structured lessons on swaras, ragas, varnams, and keerthanams. Perfect for beginners and intermediate learners with interactive exercises and demonstrations."
+                        android:textSize="14sp"
+                        android:textColor="@android:color/black" />
+
+                    <TextView
+                        android:id="@+id/read_more"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="→ Read More"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/holo_blue_dark"
+                        android:layout_marginTop="6dp" />
+                </LinearLayout>
+
+                <!-- Instructor Info -->
+                <LinearLayout
+                    android:id="@+id/instructor_section"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_marginEnd="12dp"
+                        android:src="@drawable/ic_profile"
+                        android:scaleType="centerInside"
+                        android:background="@drawable/rounded_button_white"
+                        android:padding="2dp" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/teacher_name"
+                            android:text="Guru Sri. Raghunathan Iyer"
+                            android:textStyle="bold"
+                            android:textColor="@android:color/black"
+                            android:textSize="15sp"
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/teacher_bio"
+                            android:text="Carnatic Musician and Vocal Coach"
+                            android:textColor="@android:color/darker_gray"
+                            android:textSize="13sp"
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Enroll Button Fixed at Bottom -->
+    <Button
+        android:id="@+id/enroll_button"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:text="ENROLL COURSE"
+        android:textStyle="bold"
+        android:textColor="@android:color/white"
+        android:textAllCaps="true"
+        android:backgroundTint="@color/rounded_button_orange"
+        android:layout_margin="12dp"/>
+</RelativeLayout>

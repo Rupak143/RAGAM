@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Category Filtering Test - Ragam Backend</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+        h1 {
+            color: #667eea;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+        }
+        .test-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+        .test-section h2 {
+            color: #333;
+            margin-top: 0;
+        }
+        .test-button {
+            display: inline-block;
+            padding: 12px 24px;
+            margin: 5px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        .test-button:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        .response-box {
+            margin-top: 20px;
+            padding: 15px;
+            background: white;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            max-height: 400px;
+            overflow-y: auto;
+            display: none;
+        }
+        .response-box pre {
+            margin: 0;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        .category-badge {
+            display: inline-block;
+            padding: 5px 12px;
+            margin: 3px;
+            background: #764ba2;
+            color: white;
+            border-radius: 15px;
+            font-size: 12px;
+        }
+        .success {
+            color: #28a745;
+            font-weight: bold;
+        }
+        .error {
+            color: #dc3545;
+            font-weight: bold;
+        }
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .info-box {
+            background: #e7f3ff;
+            border-left: 4px solid #2196F3;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        .info-box h3 {
+            margin-top: 0;
+            color: #2196F3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎵 Ragam Category Filtering Test</h1>
+        <p class="subtitle">Test the backend API endpoints for category filtering</p>
+
+        <div class="info-box">
+            <h3>📋 Available Categories</h3>
+            <span class="category-badge">1 - Vocal Training</span>
+            <span class="category-badge">2 - Instrumental Music</span>
+            <span class="category-badge">6 - Devotional Music</span>
+            <span class="category-badge">8 - Kids Special</span>
+        </div>
+
+        <!-- Test 1: All Courses -->
+        <div class="test-section">
+            <h2>1️⃣ Get All Courses (No Filter)</h2>
+            <p>Should return all published courses from all categories</p>
+            <button class="test-button" onclick="testEndpoint('all_courses', 'test1')">
+                🧪 Test All Courses
+            </button>
+            <div class="loading" id="loading-test1">
+                <div class="spinner"></div>
+                <p>Loading...</p>
+            </div>
+            <div class="response-box" id="response-test1"></div>
+        </div>
+
+        <!-- Test 2: Vocal Training -->
+        <div class="test-section">
+            <h2>2️⃣ Get Vocal Training Courses (category_id=1)</h2>
+            <p>Should return ONLY vocal training courses</p>
+            <button class="test-button" onclick="testEndpoint('vocal_courses', 'test2')">
+                🎤 Test Vocal Training
+            </button>
+            <div class="loading" id="loading-test2">
+                <div class="spinner"></div>
+                <p>Loading...</p>
+            </div>
+            <div class="response-box" id="response-test2"></div>
+        </div>
+
+        <!-- Test 3: Instrumental Music -->
+        <div class="test-section">
+            <h2>3️⃣ Get Instrumental Music Courses (category_id=2)</h2>
+            <p>Should return ONLY instrumental music courses</p>
+            <button class="test-button" onclick="testEndpoint('instrumental_courses', 'test3')">
+                🎸 Test Instrumental Music
+            </button>
+            <div class="loading" id="loading-test3">
+                <div class="spinner"></div>
+                <p>Loading...</p>
+            </div>
+            <div class="response-box" id="response-test3"></div>
+        </div>
+
+        <!-- Test 4: All Mentors -->
+        <div class="test-section">
+            <h2>4️⃣ Get All Mentors (No Filter)</h2>
+            <p>Should return all teachers with their course counts</p>
+            <button class="test-button" onclick="testEndpoint('all_mentors', 'test4')">
+                👨‍🏫 Test All Mentors
+            </button>
+            <div class="loading" id="loading-test4">
+                <div class="spinner"></div>
+                <p>Loading...</p>
+            </div>
+            <div class="response-box" id="response-test4"></div>
+        </div>
+
+        <!-- Test 5: Vocal Training Mentors -->
+        <div class="test-section">
+            <h2>5️⃣ Get Vocal Training Mentors (category_id=1)</h2>
+            <p>Should return ONLY teachers who teach vocal training</p>
+            <button class="test-button" onclick="testEndpoint('vocal_mentors', 'test5')">
+                🎤👨‍🏫 Test Vocal Mentors
+            </button>
+            <div class="loading" id="loading-test5">
+                <div class="spinner"></div>
+                <p>Loading...</p>
+            </div>
+            <div class="response-box" id="response-test5"></div>
+        </div>
+    </div>
+
+    <script>
+        const BASE_URL = 'http://172.20.10.3/ragamfinal/';
+        
+        const endpoints = {
+            'all_courses': BASE_URL + 'courses.php?action=all_courses',
+            'vocal_courses': BASE_URL + 'courses.php?action=all_courses&category_id=1',
+            'instrumental_courses': BASE_URL + 'courses.php?action=all_courses&category_id=2',
+            'all_mentors': BASE_URL + 'courses.php?action=get_mentors',
+            'vocal_mentors': BASE_URL + 'courses.php?action=get_mentors&category_id=1'
+        };
+
+        async function testEndpoint(endpoint, testId) {
+            const url = endpoints[endpoint];
+            const loadingDiv = document.getElementById('loading-' + testId);
+            const responseDiv = document.getElementById('response-' + testId);
+            
+            // Show loading
+            loadingDiv.style.display = 'block';
+            responseDiv.style.display = 'none';
+            
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                
+                // Hide loading
+                loadingDiv.style.display = 'none';
+                
+                // Format and display response
+                let html = '<pre>';
+                
+                // Check status
+                if (data.status === 'success') {
+                    html += '<span class="success">✅ SUCCESS</span>\n\n';
+                    html += '<strong>Endpoint:</strong> ' + url + '\n\n';
+                    html += '<strong>Message:</strong> ' + data.message + '\n\n';
+                    
+                    if (data.data && data.data.length > 0) {
+                        html += '<strong>Results Count:</strong> ' + data.data.length + '\n\n';
+                        html += '<strong>Data:</strong>\n';
+                        html += JSON.stringify(data.data, null, 2);
+                    } else {
+                        html += '<strong>Results:</strong> No data found (empty array)\n';
+                    }
+                } else {
+                    html += '<span class="error">❌ ERROR</span>\n\n';
+                    html += '<strong>Endpoint:</strong> ' + url + '\n\n';
+                    html += '<strong>Message:</strong> ' + (data.message || 'Unknown error') + '\n\n';
+                    html += '<strong>Full Response:</strong>\n';
+                    html += JSON.stringify(data, null, 2);
+                }
+                
+                html += '</pre>';
+                responseDiv.innerHTML = html;
+                responseDiv.style.display = 'block';
+                
+            } catch (error) {
+                loadingDiv.style.display = 'none';
+                responseDiv.innerHTML = '<pre><span class="error">❌ NETWORK ERROR</span>\n\n' +
+                    '<strong>Endpoint:</strong> ' + url + '\n\n' +
+                    '<strong>Error:</strong> ' + error.message + '\n\n' +
+                    '<strong>Possible Causes:</strong>\n' +
+                    '- XAMPP is not running\n' +
+                    '- PHP file has syntax errors\n' +
+                    '- IP address is incorrect\n' +
+                    '- Not on same WiFi network\n' +
+                    '- CORS issue (check browser console)</pre>';
+                responseDiv.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>

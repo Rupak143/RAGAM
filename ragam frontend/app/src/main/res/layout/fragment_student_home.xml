@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bguiblue">
+
+    <!-- Greeting Text -->
+    <TextView
+        android:id="@+id/greeting_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hey there!!"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:layout_marginTop="100dp"
+        android:layout_marginStart="20dp" />
+
+    <!-- Sub Greeting -->
+    <TextView
+        android:id="@+id/sub_greeting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="What Would you like to learn Today?\nSearch Below."
+        android:textSize="14sp"
+        android:textColor="@android:color/black"
+        android:layout_below="@id/greeting_text"
+        android:layout_marginTop="4dp"
+        android:layout_marginStart="20dp" />
+
+    <!-- Search Bar -->
+    <EditText
+        android:id="@+id/search_bar"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:hint="Search for.."
+        android:padding="10dp"
+        android:layout_margin="20dp"
+        android:layout_below="@id/sub_greeting"
+        android:background="@drawable/rounded_button_white" />
+
+    <!-- Enrolled Courses Button -->
+    <Button
+        android:id="@+id/enrolled_courses_button"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="MY ENROLLED COURSES"
+        android:textStyle="bold"
+        android:textColor="@android:color/white"
+        android:backgroundTint="@color/rounded_button_orange"
+        android:layout_below="@id/search_bar"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Completed Courses Button -->
+    <Button
+        android:id="@+id/completed_courses_button"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="MY COMPLETED COURSES"
+        android:textStyle="bold"
+        android:textColor="@android:color/white"
+        android:backgroundTint="@color/rounded_button_blue"
+        android:layout_below="@id/enrolled_courses_button"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="16dp" />
+    
+    <!-- Categories Title -->
+    <TextView
+        android:id="@+id/categories_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Categories"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        android:layout_below="@id/completed_courses_button"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="8dp" />
+
+    <!-- See All Button -->
+    <TextView
+        android:id="@+id/see_all"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SEE ALL"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/holo_blue_dark"
+        android:layout_alignTop="@id/categories_title"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="20dp" />
+
+    <!-- ScrollView Grid -->
+    <ScrollView
+        android:id="@+id/scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/categories_title"
+        android:layout_marginTop="16dp">
+
+        <GridLayout
+            android:id="@+id/categories_grid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="2"
+            android:padding="16dp"
+            android:useDefaultMargins="true">
+
+            <!-- Category 1: Vocal Training -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:padding="8dp">
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/v"
+                    android:scaleType="fitCenter" />
+                <TextView
+                    android:text="Vocal Training"
+                    android:gravity="center"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"
+                    android:layout_height="wrap_content"
+                    android:layout_width="100dp"
+                    android:layout_marginTop="8dp"/>
+            </LinearLayout>
+
+            <!-- Category 2: Instrumental Music -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:padding="8dp">
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/i"
+                    android:scaleType="fitCenter" />
+                <TextView
+                    android:text="Instrumental Music"
+                    android:gravity="center"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"
+                    android:layout_height="wrap_content"
+                    android:layout_width="100dp"
+                    android:layout_marginTop="8dp"/>
+            </LinearLayout>
+
+            <!-- Category 3: Bhakti/Devotional Music -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:padding="8dp">
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/b"
+                    android:scaleType="fitCenter" />
+                <TextView
+                    android:text="Bhakti/Devotional Music"
+                    android:gravity="center"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"
+                    android:layout_height="wrap_content"
+                    android:layout_width="100dp"
+                    android:layout_marginTop="8dp"/>
+            </LinearLayout>
+
+            <!-- Category 4: Kid's Special Music Training -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:padding="8dp">
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/k"
+                    android:scaleType="fitCenter" />
+                <TextView
+                    android:text="Kid's Special Music Training"
+                    android:gravity="center"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"
+                    android:layout_height="wrap_content"
+                    android:layout_width="100dp"
+                    android:layout_marginTop="8dp"/>
+            </LinearLayout>
+
+        </GridLayout>
+    </ScrollView>
+
+</RelativeLayout>

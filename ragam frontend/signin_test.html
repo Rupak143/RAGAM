@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Signin Test Page</title>
+</head>
+<body>
+    <h2>🎵 Ragamfinal - Signin Test</h2>
+    
+    <div>
+        <h3>✅ Backend Status: WORKING</h3>
+        <p>Database connected, test users created, API endpoints responding correctly.</p>
+    </div>
+    
+    <div>
+        <h3>🔑 Test Credentials:</h3>
+        <p><strong>Student:</strong> student@test.com / password</p>
+        <p><strong>Teacher:</strong> teacher@test.com / password</p>
+    </div>
+    
+    <div>
+        <h3>📱 Test Student Login</h3>
+        <button onclick="testStudentLogin()">Test Student Login</button>
+        <div id="studentResult"></div>
+    </div>
+    
+    <div>
+        <h3>👨‍🏫 Test Teacher Login</h3>
+        <button onclick="testTeacherLogin()">Test Teacher Login</button>
+        <div id="teacherResult"></div>
+    </div>
+    
+    <div>
+        <h3>📋 API Details:</h3>
+        <p><strong>Endpoint:</strong> http://10.0.2.2/ragamfinal/auth.php?action=login</p>
+        <p><strong>Method:</strong> POST</p>
+        <p><strong>Content-Type:</strong> application/json</p>
+        <p><strong>Body Format:</strong> {"email":"xxx", "password":"xxx", "userType":"student/teacher"}</p>
+    </div>
+
+    <script>
+        async function testStudentLogin() {
+            const result = document.getElementById('studentResult');
+            result.innerHTML = 'Testing...';
+            
+            try {
+                const response = await fetch('auth.php?action=login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        email: 'student@test.com',
+                        password: 'password',
+                        userType: 'student'
+                    })
+                });
+                
+                const data = await response.json();
+                result.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+                
+                if (data.success) {
+                    result.style.color = 'green';
+                } else {
+                    result.style.color = 'red';
+                }
+            } catch (error) {
+                result.innerHTML = `Error: ${error.message}`;
+                result.style.color = 'red';
+            }
+        }
+        
+        async function testTeacherLogin() {
+            const result = document.getElementById('teacherResult');
+            result.innerHTML = 'Testing...';
+            
+            try {
+                const response = await fetch('auth.php?action=login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        email: 'teacher@test.com',
+                        password: 'password',
+                        userType: 'teacher'
+                    })
+                });
+                
+                const data = await response.json();
+                result.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+                
+                if (data.success) {
+                    result.style.color = 'green';
+                } else {
+                    result.style.color = 'red';
+                }
+            } catch (error) {
+                result.innerHTML = `Error: ${error.message}`;
+                result.style.color = 'red';
+            }
+        }
+    </script>
+</body>
+</html>

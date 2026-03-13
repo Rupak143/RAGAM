@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@android:color/white"
+    android:padding="20dp"
+    android:layout_marginBottom="16dp"
+    android:elevation="4dp">
+
+    <!-- Video Number Header -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="16dp">
+
+        <TextView
+            android:id="@+id/video_number"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Video 1"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/holo_blue_dark" />
+
+        <TextView
+            android:id="@+id/video_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Not uploaded"
+            android:textSize="13sp"
+            android:textColor="@android:color/holo_orange_dark" />
+    </LinearLayout>
+
+    <!-- Lesson Title -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lesson Title "
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:layout_marginBottom="6dp" />
+
+    <EditText
+        android:id="@+id/video_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="e.g., Introduction to Guitar Basics"
+        android:background="@drawable/rounded_edittext"
+        android:padding="14dp"
+        android:textSize="14sp"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Lesson Description -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lesson Description "
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:layout_marginBottom="6dp" />
+
+    <EditText
+        android:id="@+id/video_description"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:hint="What will students learn in this lesson?"
+        android:background="@drawable/rounded_edittext"
+        android:padding="14dp"
+        android:gravity="top"
+        android:inputType="textMultiLine"
+        android:textSize="14sp"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Video File Section -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Video File "
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:layout_marginBottom="6dp" />
+
+    <TextView
+        android:id="@+id/selected_file_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="No video selected"
+        android:textSize="13sp"
+        android:textColor="@android:color/darker_gray"
+        android:layout_marginBottom="10dp"
+        android:paddingStart="4dp"
+        android:paddingEnd="4dp" />
+
+    <Button
+        android:id="@+id/btn_select_video"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text=" Select Video"
+        android:background="@drawable/rounded_button_blue"
+        android:textColor="@android:color/white"
+        android:textSize="15sp" />
+
+</LinearLayout>

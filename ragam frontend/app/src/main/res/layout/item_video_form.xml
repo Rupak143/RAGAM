@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/rounded_button_white"
+    android:padding="16dp"
+    android:layout_marginBottom="16dp">
+
+    <!-- Video Number Header -->
+    <TextView
+        android:id="@+id/tv_video_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Video 1"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Video Title -->
+    <EditText
+        android:id="@+id/et_video_title"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="Video Title"
+        android:background="@drawable/edit_text_background"
+        android:padding="12dp"
+        android:textColor="@android:color/black"
+        android:textColorHint="@android:color/darker_gray"
+        android:layout_marginBottom="12dp" />
+
+    <!-- Video Description -->
+    <EditText
+        android:id="@+id/et_video_description"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:hint="Video Description"
+        android:background="@drawable/edit_text_background"
+        android:padding="12dp"
+        android:gravity="top"
+        android:inputType="textMultiLine"
+        android:textColor="@android:color/black"
+        android:textColorHint="@android:color/darker_gray"
+        android:layout_marginBottom="12dp" />
+
+    <!-- Upload Video Button -->
+    <Button
+        android:id="@+id/btn_select_video"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:text="Select Video File"
+        android:background="@drawable/rounded_button_blue"
+        android:textColor="@android:color/white"
+        android:textStyle="bold" />
+
+    <!-- Selected Video Status -->
+    <TextView
+        android:id="@+id/tv_selected_video"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No video selected"
+        android:textSize="14sp"
+        android:textColor="@android:color/darker_gray"
+        android:layout_marginTop="8dp"
+        android:visibility="visible" />
+
+</LinearLayout>

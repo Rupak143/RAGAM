@@ -1,0 +1,187 @@
+<?php
+header('Content-Type: application/json; charset=UTF-8');
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
+header('Access-Control-Allow-Headers: Content-Type');
+if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
+    exit(0);
+}
+require_once 'config.php';
+$action = isset($_GET['action']) ? $_GET['action'] : '';
+$database = new DatabaseConfig();
+$conn = $database->getConnection();
+if (!$conn) {
+    http_response_code(500);
+    echo json_encode(['success' => false, 'status' => 'error', 'message' => 'Database connection failed', 'data' => null]);
+    exit;
+}
+// LOGIN - Support both bcrypt hashed and plain text passwords
+if ($action == 'login') {
+    $input = json_decode(file_get_contents('php://input'), true);
+    $email = isset($input['email']) ? trim($input['email']) : '';
+    $password = isset($input['password']) ? $input['password'] : '';
+    if (empty($email) || empty($password)) {
+        http_response_code(400);
+        echo json_encode(['success' => false, 'status' => 'error', 'message' => 'Email and password required', 'data' => null]);
+        exit;
+    }
+    try {
+        $query = "SELECT * FROM users WHERE email = :email AND is_active = 1 LIMIT 1";
+        $stmt = $conn->prepare($query);
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        // Check password - support both bcrypt and plain text
+        $passwordValid = false;
+        if ($user) {
+            // Check if password is bcrypt hashed (starts with $2y$)
+            if (substr($user['password'], 0, 4) === '$2y$') {
+                $passwordValid = password_verify($password, $user['password']);
+            } else {
+                // Plain text comparison for backwards compatibility
+                $passwordValid = ($user['password'] === $password);
+            }
+        }
+        if ($user && $passwordValid) {
+            echo json_encode([
+                'success' => true,
+                'status' => 'success',
+                'message' => 'Login successful',
+                'data' => [
+                    'id' => (int)$user['user_id'],
+                    'user_id' => (int)$user['user_id'],
+                    'email' => $user['email'],
+                    'full_name' => $user['full_name'],
+                    'name' => $user['full_name'],
+                    'user_type' => $user['user_type'],
+                    'phone' => $user['phone'],
+                    'profile_image' => $user['profile_image'],
+                    'bio' => $user['bio'],
+                    'specialization' => $user['specialization'],
+                    'experience_years' => (int)$user['experience_years'],
+                    'is_verified' => (bool)$user['is_verified'],
+                    'is_active' => (bool)$user['is_active']
+                ]
+            ]);
+        } else {
+            http_response_code(401);
+            echo json_encode(['success' => false, 'status' => 'error', 'message' => 'Invalid email or password', 'data' => null]);
+        }
+    } catch (PDOException $e) {
+        http_response_code(500);
+        echo json_encode(['success' => false, 'status' => 'error', 'message' => 'Database error: ' . $e->getMessage(), 'data' => null]);
+    }
+    exit;
+}
+// REGISTER - Hash passwords with bcrypt
+if ($action == 'register') {
+    $input = json_decode(file_get_contents('php://input'), true);
+    $email = isset($input['email']) ? trim($input['email']) : '';
+    $password = isset($input['password']) ? $input['password'] : '';
+    $fullName = isset($input['full_name']) ? trim($input['full_name']) : '';
+    $userType = isset($input['user_type']) ? $input['user_type'] : 'student';
+    $phone = isset($input['phone']) ? trim($input['phone']) : '';
+    $bio = isset($input['bio']) ? trim($input['bio']) : '';
+    $specialization = isset($input['specialization']) ? trim($input['specialization']) : '';
+    $experienceYears = isset($input['experience_years']) ? (int)$input['experience_years'] : 0;
+    if (empty($email) || empty($password) || empty($fullName)) {
+        http_response_code(400);
+        echo json_encode(['success' => false, 'status' => 'error', 'message' => 'Email, password, and full name required', 'data' => null]);
+        exit;
+    }
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        http_response_code(400);
+        echo json_encode(['success' => false, 'status' => 'error', 'message' => 'Invalid email format', 'data' => null]);
+        exit;
+    }
+    if (!in_array($userType, ['student', 'teacher'])) {
+        http_response_code(400);
+        echo json_encode(['success' => false, 'status' => 'error', 'message' => 'Invalid user type', 'data' => null]);
+        exit;
+    }
+    try {
+        $checkQuery = "SELECT user_id FROM users WHERE email = :email LIMIT 1";
+        $checkStmt = $conn->prepare($checkQuery);
+        $checkStmt->bindParam(':email', $email);
+        $checkStmt->execute();
+        if ($checkStmt->rowCount() > 0) {
+            http_response_code(409);
+            echo json_encode(['success' => false, 'status' => 'error', 'message' => 'Email already registered', 'data' => null]);
+            exit;
+        }
+        // Hash password with bcrypt
+        $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+        $insertQuery = "INSERT INTO users (email, password, full_name, user_type, phone, bio, specialization, experience_years, is_verified, is_active) 
+                       VALUES (:email, :password, :full_name, :user_type, :phone, :bio, :specialization, :experience_years, 0, 1)";
+        $insertStmt = $conn->prepare($insertQuery);
+        $insertStmt->bindParam(':email', $email);
+        $insertStmt->bindParam(':password', $hashedPassword);
+        $insertStmt->bindParam(':full_name', $fullName);
+        $insertStmt->bindParam(':user_type', $userType);
+        $insertStmt->bindParam(':phone', $phone);
+        $insertStmt->bindParam(':bio', $bio);
+        $insertStmt->bindParam(':specialization', $specialization);
+        $insertStmt->bindParam(':experience_years', $experienceYears);
+        if ($insertStmt->execute()) {
+            $userId = $conn->lastInsertId();
+            echo json_encode([
+                'success' => true,
+                'status' => 'success',
+                'message' => 'Registration successful',
+                'data' => [
+                    'id' => (int)$userId,
+                    'user_id' => (int)$userId,
+                    'email' => $email,
+                    'full_name' => $fullName,
+                    'name' => $fullName,
+                    'user_type' => $userType,
+                    'phone' => $phone,
+                    'bio' => $bio,
+                    'specialization' => $specialization,
+                    'experience_years' => $experienceYears,
+                    'is_verified' => false,
+                    'is_active' => true
+                ]
+            ]);
+        } else {
+            throw new Exception('Failed to insert user');
+        }
+    } catch (PDOException $e) {
+        http_response_code(500);
+        echo json_encode(['success' => false, 'status' => 'error', 'message' => 'Database error: ' . $e->getMessage(), 'data' => null]);
+    }
+    exit;
+}
+// GET_TEACHERS
+if ($action == 'get_teachers') {
+    try {
+        $query = "SELECT user_id, full_name, email, phone, specialization, experience_years, bio, is_verified, is_active 
+                  FROM users WHERE user_type = 'teacher' AND is_active = 1 
+                  ORDER BY is_verified DESC, experience_years DESC";
+        $stmt = $conn->prepare($query);
+        $stmt->execute();
+        $teachers = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $formattedTeachers = array();
+        foreach ($teachers as $teacher) {
+            $formattedTeachers[] = [
+                'user_id' => (int)$teacher['user_id'],
+                'full_name' => $teacher['full_name'],
+                'email' => $teacher['email'],
+                'phone' => $teacher['phone'],
+                'specialization' => $teacher['specialization'],
+                'experience_years' => (int)$teacher['experience_years'],
+                'bio' => $teacher['bio'],
+                'is_verified' => (bool)$teacher['is_verified'],
+                'is_active' => (bool)$teacher['is_active']
+            ];
+        }
+        echo json_encode(['success' => true, 'status' => 'success', 'message' => 'Teachers retrieved', 'data' => $formattedTeachers]);
+    } catch (PDOException $e) {
+        http_response_code(500);
+        echo json_encode(['success' => false, 'status' => 'error', 'message' => 'Database error: ' . $e->getMessage(), 'data' => null]);
+    }
+    exit;
+}
+http_response_code(400);
+echo json_encode(['success' => false, 'status' => 'error', 'message' => 'Invalid action: ' . $action, 'data' => null]);
+?>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bguiblue"
+    android:padding="16dp">
+
+    <!-- Greeting -->
+    <TextView
+        android:id="@+id/greeting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="    Hey Mr. Instructor"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="80dp" />
+
+    <!-- Create Course Button -->
+    <Button
+        android:id="@+id/btn_create_course"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:text="Create Course"
+        android:backgroundTint="@color/rounded_button_green"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        android:layout_below="@id/greeting"
+        android:layout_marginTop="30dp" />
+
+    <!-- View Students Button -->
+    <Button
+        android:id="@+id/btn_view_students"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:text="View Students"
+        android:backgroundTint="@color/rounded_button_orange"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        android:layout_below="@id/btn_create_course"
+        android:layout_marginTop="20dp" />
+
+    <!-- My Courses Button -->
+    <Button
+        android:id="@+id/btn_my_courses"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:text="My Courses"
+        android:backgroundTint="@color/rounded_button_blue"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        android:layout_below="@id/btn_view_students"
+        android:layout_marginTop="20dp" />
+
+</RelativeLayout>

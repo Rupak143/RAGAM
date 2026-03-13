@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fixed Auth Test - Using Your Database</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .success { color: green; }
+        .error { color: red; }
+        .test-button { background: #007cba; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin: 5px; }
+        .test-button:hover { background: #005a8b; }
+        pre { background: #f0f0f0; padding: 10px; border-radius: 5px; overflow-x: auto; }
+        .credentials { background: #e8f4f8; padding: 15px; border-radius: 5px; margin: 10px 0; }
+        .database-info { background: #fff3cd; padding: 15px; border-radius: 5px; margin: 10px 0; }
+    </style>
+</head>
+<body>
+    <h1>🎵 Fixed Ragam Authentication Test</h1>
+    
+    <div class="database-info">
+        <h3>📊 Your Database Users:</h3>
+        <?php
+        // Show actual users from database
+        try {
+            include_once 'config.php';
+            $database = new DatabaseConfig();
+            $db = $database->getConnection();
+            
+            if ($db) {
+                $stmt = $db->query("SELECT user_id, email, full_name, user_type FROM users WHERE is_active = 1");
+                $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                
+                echo "<table border='1' cellpadding='5'>";
+                echo "<tr><th>ID</th><th>Email</th><th>Name</th><th>Type</th><th>Test Login</th></tr>";
+                foreach ($users as $user) {
+                    $email = htmlspecialchars($user['email']);
+                    $userType = htmlspecialchars($user['user_type']);
+                    echo "<tr>";
+                    echo "<td>{$user['user_id']}</td>";
+                    echo "<td>$email</td>";
+                    echo "<td>{$user['full_name']}</td>";
+                    echo "<td>$userType</td>";
+                    echo "<td><button class='test-button' onclick='testUserLogin(\"$email\", \"$userType\")'>Test</button></td>";
+                    echo "</tr>";
+                }
+                echo "</table>";
+                echo "<p><strong>Note:</strong> You'll need to know the actual passwords for these users.</p>";
+            } else {
+                echo "<p class='error'>❌ Database connection failed</p>";
+            }
+        } catch (Exception $e) {
+            echo "<p class='error'>❌ Error: " . $e->getMessage() . "</p>";
+        }
+        ?>
+    </div>
+    
+    <div class="credentials">
+        <h3>🔑 Test Credentials (Try these passwords):</h3>
+        <p>For your existing users, try these common passwords:</p>
+        <ul>
+            <li><strong>password</strong></li>
+            <li><strong>123456</strong></li>
+            <li><strong>admin</strong></li>
+            <li><strong>test</strong></li>
+            <li><strong>Same as email without @domain</strong></li>
+        </ul>
+    </div>
+    
+    <h2>Manual Test:</h2>
+    <div>
+        <label>Email: <input type="email" id="email" value="ram@gmail.com"></label><br><br>
+        <label>Password: <input type="password" id="password" value="password"></label><br><br>
+        <label>Type: 
+            <select id="usertype">
+                <option value="student">Student</option>
+                <option value="teacher">Teacher</option>
+            </select>
+        </label><br><br>
+        <button class="test-button" onclick="manualTest()">Test Login</button>
+        <button class="test-button" onclick="testAllCommonPasswords()">Try All Common Passwords</button>
+    </div>
+
+    <div id="result"></div>
+
+    <script>
+        function showResult(title, data, isSuccess = true) {
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = `
+                <h3 class="${isSuccess ? 'success' : 'error'}">${title}</h3>
+                <pre>${JSON.stringify(data, null, 2)}</pre>
+            `;
+        }
+
+        async function testLogin(email, password, userType, testName) {
+            try {
+                const response = await fetch('auth.php?action=login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        email: email,
+                        password: password,
+                        user_type: userType
+                    })
+                });
+                
+                const data = await response.json();
+                showResult(`${testName} Result:`, data, data.success);
+                
+                if (data.success) {
+                    alert(`✅ SUCCESS! ${email} can login with password: ${password}`);
+                }
+                
+                return data.success;
+            } catch (error) {
+                showResult(`${testName} Error:`, { error: error.message }, false);
+                return false;
+            }
+        }
+
+        function testUserLogin(email, userType) {
+            const password = prompt(`Enter password for ${email}:`);
+            if (password) {
+                testLogin(email, password, userType, `${email} Login`);
+            }
+        }
+
+        function manualTest() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const userType = document.getElementById('usertype').value;
+            
+            testLogin(email, password, userType, 'Manual Test');
+        }
+
+        async function testAllCommonPasswords() {
+            const email = document.getElementById('email').value;
+            const userType = document.getElementById('usertype').value;
+            const commonPasswords = ['password', '123456', 'admin', 'test', 'ram', 'rupak', 'ravina'];
+            
+            showResult('Testing Common Passwords...', {message: 'Trying multiple passwords...'});
+            
+            for (let password of commonPasswords) {
+                const success = await testLogin(email, password, userType, `Password: ${password}`);
+                if (success) {
+                    alert(`🎉 FOUND WORKING PASSWORD: ${password} for ${email}`);
+                    break;
+                }
+                await new Promise(resolve => setTimeout(resolve, 500)); // Small delay
+            }
+        }
+    </script>
+</body>
+</html>

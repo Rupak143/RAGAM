@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/bottom_nav"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:orientation="horizontal"
+    android:background="@android:color/white"
+    android:gravity="center_vertical"
+    android:elevation="16dp">
+
+    <ImageView
+        android:id="@+id/ic_home"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_weight="1"
+        android:src="@drawable/ic_home"
+        android:contentDescription="Home"
+        android:padding="6dp"
+        android:scaleType="centerInside" />
+
+    <ImageView
+        android:id="@+id/ic_courses"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_weight="1"
+        android:src="@drawable/ic_courses"
+        android:contentDescription="Courses"
+        android:padding="6dp"
+        android:scaleType="centerInside"
+        android:visibility="visible" />
+
+    <ImageView
+        android:id="@+id/ic_profile"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_weight="1"
+        android:src="@drawable/ic_profile"
+        android:contentDescription="Profile"
+        android:padding="6dp"
+        android:scaleType="centerInside" />
+</LinearLayout>
